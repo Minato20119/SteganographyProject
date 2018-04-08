@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package BackendRSA;
 
@@ -19,46 +19,46 @@ import java.util.Base64;
  */
 public class RSAKeyPairGenerator {
 
-	private PrivateKey privateKey;
-	private PublicKey publicKey;
+    private final PrivateKey privateKey;
+    private final PublicKey publicKey;
 
-	public RSAKeyPairGenerator() throws NoSuchAlgorithmException {
-		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		keyGen.initialize(1024);
+    public RSAKeyPairGenerator() throws NoSuchAlgorithmException {
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+        keyGen.initialize(1024);
 
-		KeyPair keyPair = keyGen.generateKeyPair();
-		this.privateKey = keyPair.getPrivate();
-		this.publicKey = keyPair.getPublic();
-	}
+        KeyPair keyPair = keyGen.generateKeyPair();
+        this.privateKey = keyPair.getPrivate();
+        this.publicKey = keyPair.getPublic();
+    }
 
-	private void writeTofile(String path, byte[] key) throws IOException {
-		File f = new File(path);
-		f.getParentFile().mkdirs();
+    private void writeTofile(String path, byte[] key) throws IOException {
+        File f = new File(path);
+        f.getParentFile().mkdirs();
 
-		FileOutputStream fos = new FileOutputStream(f);
-		fos.write(key);
-		fos.flush();
-		fos.close();
-	}
+        try (FileOutputStream fos = new FileOutputStream(f)) {
+            fos.write(key);
+            fos.flush();
+        }
+    }
 
-	private PublicKey getPublicKey() {
-		return publicKey;
-	}
+    private PublicKey getPublicKey() {
+        return publicKey;
+    }
 
-	private PrivateKey getPrivateKey() {
-		return privateKey;
-	}
+    private PrivateKey getPrivateKey() {
+        return privateKey;
+    }
 
-	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-		RSAKeyPairGenerator keyPairGenerator = new RSAKeyPairGenerator();
+    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+        RSAKeyPairGenerator keyPairGenerator = new RSAKeyPairGenerator();
 
-		keyPairGenerator.writeTofile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\public1.key",
-				keyPairGenerator.getPublicKey().getEncoded());
-		keyPairGenerator.writeTofile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\private1.key",
-				keyPairGenerator.getPrivateKey().getEncoded());
+        keyPairGenerator.writeTofile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\public1.key",
+                keyPairGenerator.getPublicKey().getEncoded());
+        keyPairGenerator.writeTofile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\private1.key",
+                keyPairGenerator.getPrivateKey().getEncoded());
 
-		System.out.println("Public key: " + Base64.getEncoder().encodeToString(keyPairGenerator.getPublicKey().getEncoded()));
-		System.out.println(
-				"Private key: " + Base64.getEncoder().encodeToString(keyPairGenerator.getPrivateKey().getEncoded()));
-	}
+        System.out.println("Public key: " + Base64.getEncoder().encodeToString(keyPairGenerator.getPublicKey().getEncoded()));
+        System.out.println(
+                "Private key: " + Base64.getEncoder().encodeToString(keyPairGenerator.getPrivateKey().getEncoded()));
+    }
 }

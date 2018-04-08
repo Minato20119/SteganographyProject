@@ -16,9 +16,6 @@ import javax.imageio.ImageIO;
  */
 public class SentSite {
 
-//	private static final String PATH_FILE_IMAGE = "C:\\Users\\Minato\\Pictures\\Test.png";
-//	private static final String PATH_OUTPUT_NEW_IMAGE = "C:\\Users\\Minato\\Pictures\\Image\\output.png";
-//	private static final String PATH_FILE_TEXT = "C:\\Users\\Minato\\Pictures\\Image\\text.txt";
     private static final int LIMIT_BIT_TO_CHANGE = 7;
     private static final int NUMBER_BLOCK_CIPHER = 4;
     private static final int NUMBER_BLOCK_CIPHER_INDICATOR = 6;
@@ -26,34 +23,6 @@ public class SentSite {
     private static int checkGreenToChange = 0;
     private static BufferedReader bufferedReader;
 
-//	public static void main(String[] args) {
-//
-//		// Get text from file
-//		String text = inputTextFile();
-//
-//		// Get text encrypted
-//		String textEncrypted = "";
-//
-//		try {
-//			textEncrypted = RSAUtil.getTextToEncrypt(text);
-//		} catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException
-//				| NoSuchAlgorithmException e) {
-//			e.printStackTrace();
-//		}
-//
-//		System.out.println("Text Encrypted: " + textEncrypted);
-//
-//		// ConvertStringEncryptedToBinary
-//		String textBinary = convertTextToBinary(textEncrypted);
-//
-//		image = inputImage(PATH_FILE_IMAGE);
-//
-//		getValueRGB(textBinary);
-//
-//		writeNewImage();
-//
-//		System.out.println("Write new image done!");
-//	}
     public static BufferedImage inputImage(String pathFileImage) {
         BufferedImage image = null;
         File file = null;
@@ -95,7 +64,6 @@ public class SentSite {
                     fileReader.close();
                 }
             } catch (IOException e2) {
-                e2.printStackTrace();
             }
         }
         return readLine2;
@@ -116,24 +84,7 @@ public class SentSite {
             }
         }
 
-        getBinary(binary.toString());
-
-        String str = binary.toString();
-
-//        for (int i = 0; i < str.length(); i++) {
-//
-//            if ((i % 4 == 0) && (i > 0)) {
-//                System.out.print(" ");
-//            }
-
-//            System.out.print(str.charAt(i));
-//        }
-
         return binary.toString();
-    }
-
-    public static String getBinary(String binary) {
-        return binary;
     }
 
     public static void getValueRGB(BufferedImage image, String binaryString) {
@@ -141,17 +92,13 @@ public class SentSite {
         int height = image.getHeight();
         int width = image.getWidth();
 
-        // System.out.println("Width: " + width);
-        // System.out.println("Height: " + height);
         int rgb = 0;
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 rgb = image.getRGB(j, i);
 
-                //
                 if (increase >= binaryString.length()) {
-//                    System.out.println("i: " + i + " | j: " + j);
                     break;
                 }
 
@@ -160,7 +107,6 @@ public class SentSite {
                 image.setRGB(j, i, rgbNew);
             }
 
-            //
             if (increase >= binaryString.length()) {
                 break;
             }

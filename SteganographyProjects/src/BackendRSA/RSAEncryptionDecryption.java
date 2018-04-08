@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package BackendRSA;
 
@@ -29,87 +29,79 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class RSAEncryptionDecryption {
 
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException,
-			IllegalBlockSizeException, BadPaddingException, IOException {
-		String minato = "Hello Minato!";
+    public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException,
+            IllegalBlockSizeException, BadPaddingException, IOException {
+        String minato = "Hello Minato!";
 
-		byte[] data = minato.getBytes();
+        byte[] data = minato.getBytes();
 
-		byte[] dataEncrypt = rsaEncrypt(data);
+        byte[] dataEncrypt = rsaEncrypt(data);
 
-		String str = new String(dataEncrypt, StandardCharsets.UTF_8);
-		
-		System.out.println(str.length());
-		
-		System.out.println(new String(dataEncrypt, StandardCharsets.UTF_8));
+        String str = new String(dataEncrypt, StandardCharsets.UTF_8);
 
-		byte[] dataDecryption = rsaDecryption(dataEncrypt);
+        System.out.println(str.length());
 
-		System.out.println(new String(dataDecryption, StandardCharsets.UTF_8));
-	}
+        System.out.println(new String(dataEncrypt, StandardCharsets.UTF_8));
 
-	private static PublicKey readKeyFromFile(String keyFileName) throws IOException {
-		InputStream in = new FileInputStream(keyFileName);
-		ObjectInputStream oin = new ObjectInputStream(new BufferedInputStream(in));
+        byte[] dataDecryption = rsaDecryption(dataEncrypt);
 
-		try {
-			BigInteger m = (BigInteger) oin.readObject();
-			BigInteger e = (BigInteger) oin.readObject();
+        System.out.println(new String(dataDecryption, StandardCharsets.UTF_8));
+    }
 
-			RSAPublicKeySpec keySpec = new RSAPublicKeySpec(m, e);
-			KeyFactory fact = KeyFactory.getInstance("RSA");
-			PublicKey pubKey = fact.generatePublic(keySpec);
+    private static PublicKey readKeyFromFile(String keyFileName) throws IOException {
+        InputStream in = new FileInputStream(keyFileName);
+        try (ObjectInputStream oin = new ObjectInputStream(new BufferedInputStream(in))) {
+            BigInteger m = (BigInteger) oin.readObject();
+            BigInteger e = (BigInteger) oin.readObject();
 
-			return pubKey;
+            RSAPublicKeySpec keySpec = new RSAPublicKeySpec(m, e);
+            KeyFactory fact = KeyFactory.getInstance("RSA");
+            PublicKey pubKey = fact.generatePublic(keySpec);
 
-		} catch (Exception e) {
-			throw new RuntimeException("Spurious serialisation error", e);
-		} finally {
-			oin.close();
-		}
-	}
+            return pubKey;
 
-	private static PrivateKey readPrivateKeyFromFile(String keyFileName) throws IOException {
-		InputStream in = new FileInputStream(keyFileName);
-		ObjectInputStream oInputStream = new ObjectInputStream(new BufferedInputStream(in));
+        } catch (Exception e) {
+            throw new RuntimeException("Spurious serialisation error", e);
+        }
+    }
 
-		try {
-			BigInteger m = (BigInteger) oInputStream.readObject();
-			BigInteger e = (BigInteger) oInputStream.readObject();
+    private static PrivateKey readPrivateKeyFromFile(String keyFileName) throws IOException {
+        InputStream in = new FileInputStream(keyFileName);
+        try (ObjectInputStream oInputStream = new ObjectInputStream(new BufferedInputStream(in))) {
+            BigInteger m = (BigInteger) oInputStream.readObject();
+            BigInteger e = (BigInteger) oInputStream.readObject();
 
-			RSAPrivateKeySpec keySpec = new RSAPrivateKeySpec(m, e);
-			KeyFactory fact = KeyFactory.getInstance("RSA");
-			PrivateKey prKey = fact.generatePrivate(keySpec);
+            RSAPrivateKeySpec keySpec = new RSAPrivateKeySpec(m, e);
+            KeyFactory fact = KeyFactory.getInstance("RSA");
+            PrivateKey prKey = fact.generatePrivate(keySpec);
 
-			return prKey;
+            return prKey;
 
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			oInputStream.close();
-		}
-	}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	private static byte[] rsaEncrypt(byte[] data) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    private static byte[] rsaEncrypt(byte[] data) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
-		PublicKey pubKey = readKeyFromFile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\public.key");
-		Cipher cipher = Cipher.getInstance("RSA");
-		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-		byte[] cipherData = cipher.doFinal(data);
+        PublicKey pubKey = readKeyFromFile("C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\public.key");
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, pubKey);
+        byte[] cipherData = cipher.doFinal(data);
 
-		return cipherData;
-	}
+        return cipherData;
+    }
 
-	private static byte[] rsaDecryption(byte[] data) throws IOException, NoSuchAlgorithmException,
-			NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    private static byte[] rsaDecryption(byte[] data) throws IOException, NoSuchAlgorithmException,
+            NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
-		PrivateKey prKey = readPrivateKeyFromFile(
-				"C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\private.key");
-		Cipher cipher = Cipher.getInstance("RSA");
-		cipher.init(Cipher.DECRYPT_MODE, prKey);
-		byte[] cipherData = cipher.doFinal(data);
+        PrivateKey prKey = readPrivateKeyFromFile(
+                "C:\\Users\\Minato\\Documents\\JS\\Certificate\\RSA\\ByJava\\private.key");
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, prKey);
+        byte[] cipherData = cipher.doFinal(data);
 
-		return cipherData;
-	}
+        return cipherData;
+    }
 }

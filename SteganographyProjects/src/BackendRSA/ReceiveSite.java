@@ -17,52 +17,16 @@ public class ReceiveSite {
     private static String BINARY_TEXT = "";
     private static final int NUMBER_BLOK_CIPHER_INDICATOR = 6;
     private static final int NUMBER_BLOK_CIPHER = 4;
-    private static final String PATH_FILE_IMAGE_STEGO = "C:\\Users\\Minato\\Pictures\\Image\\output.png";
 
-//	public static void main(String[] args) {
-//
-//		BufferedImage image = inputImage(PATH_FILE_IMAGE_STEGO);
-//		getValueRGB(image);
-//
-//		System.out.println("BINARY_TEXT: " + BINARY_TEXT);
-//
-//		String textEncrypted = "";
-//
-//		for (int i = 0; i <= BINARY_TEXT.length(); i += 8) {
-//			String word = "";
-//
-//			if (i > 0) {
-//				word = BINARY_TEXT.substring(i - 8, i);
-//				int charCode = convertBinaryToDecimal(word);
-//				textEncrypted += new Character((char) charCode).toString();
-//			}
-//		}
-//
-//		System.out.println();
-//
-//		System.out.println("Text encryped: " + textEncrypted);
-//
-//		String textDecrypted = "";
-//		try {
-//			textDecrypted = RSAUtil.getTextToDecrypt(textEncrypted);
-//		} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException
-//				| NoSuchPaddingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		System.out.println();
-//		System.out.println("Text decrypted: " + textDecrypted);
-//	}
     // Convert binary to decimal
-    private static int convertBinaryToDecimal(String binary) {
+    public static int convertBinaryToDecimal(String binary) {
 
         int decimal = Integer.parseInt(binary, 2);
 
         return decimal;
     }
 
-    private static BufferedImage inputImage(String pathFileImage) {
+    public static BufferedImage inputImage(String pathFileImage) {
         BufferedImage image = null;
         File file = null;
         try {
@@ -76,7 +40,7 @@ public class ReceiveSite {
         return image;
     }
 
-    private static void getValueRGB(BufferedImage image) {
+    public static String getValueRGB(BufferedImage image) {
 
         int height = image.getHeight();
         int width = image.getWidth();
@@ -88,10 +52,8 @@ public class ReceiveSite {
             for (int j = 0; j < width; j++) {
                 rgb = image.getRGB(j, i);
 
-                String word = "";
-
                 if (BINARY_TEXT.length() >= 8) {
-                    word = BINARY_TEXT.substring(BINARY_TEXT.length() - 8, BINARY_TEXT.length());
+                    String word = BINARY_TEXT.substring(BINARY_TEXT.length() - 8, BINARY_TEXT.length());
                     int charCode = convertBinaryToDecimal(word);
                     textEncrypted += new Character((char) charCode).toString();
                 }
@@ -107,6 +69,8 @@ public class ReceiveSite {
                 break;
             }
         }
+
+        return BINARY_TEXT;
     }
 
     private static void getCipher(int rgb) {

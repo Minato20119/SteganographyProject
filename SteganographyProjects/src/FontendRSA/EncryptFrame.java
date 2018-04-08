@@ -25,8 +25,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class EncryptFrame extends javax.swing.JFrame {
 
-    private static final String PATH_OUTPUT_NEW_IMAGE = "C:\\Users\\Minato\\Pictures\\Image\\output.png";
-
     /**
      * Creates new form NewJFrame
      */
@@ -64,6 +62,7 @@ public class EncryptFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +151,8 @@ public class EncryptFrame extends javax.swing.JFrame {
         jTextArea4.setRows(5);
         jScrollPane4.setViewportView(jTextArea4);
 
+        jLabel6.setText("Minato");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,42 +162,50 @@ public class EncryptFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addGap(54, 54, 54)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel5))
+                                        .addGap(54, 54, 54)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField2)
+                                    .addComponent(jTextField3)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jScrollPane3)
+                                    .addComponent(jScrollPane4)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(70, 70, 70))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(jLabel1)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addGap(248, 248, 248)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -236,7 +245,7 @@ public class EncryptFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,7 +290,8 @@ public class EncryptFrame extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "JPG & PNG Images", "jpg", "png");
         chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(chooser);
+        chooser.setDialogTitle("Specify a file to save");
+        int returnVal = chooser.showSaveDialog(chooser);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You choose to save this file: "
                     + chooser.getSelectedFile().getName());
@@ -314,12 +324,21 @@ public class EncryptFrame extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
         }
 
-        if (!plainText.equals("") && !jTextArea2.getText().equals("")) {
+        if (jTextField2.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,
+                    "Please choose save file new image!", "WARNING",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
+        if (!plainText.equals("") && !jTextArea2.getText().equals("") && !jTextField2.getText().equals("")) {
 
             String textEncrypt = "";
             try {
                 textEncrypt = RSAUtil.getTextToEncrypt(plainText, jTextArea2.getText());
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException | NoSuchAlgorithmException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Public key is invalid!", "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(EncryptFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -332,12 +351,13 @@ public class EncryptFrame extends javax.swing.JFrame {
             SentSite.getValueRGB(image, textBinary);
 
             // Write new image
-            SentSite.writeNewImage(image, PATH_OUTPUT_NEW_IMAGE);
+            SentSite.writeNewImage(image, jTextField2.getText());
+
+            JOptionPane.showMessageDialog(null,
+                    "Encrypt complete!", "INFORMATION",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
 
-        JOptionPane.showMessageDialog(null,
-                "Encrypt complete!", "INFORMATION",
-                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -387,6 +407,7 @@ public class EncryptFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
