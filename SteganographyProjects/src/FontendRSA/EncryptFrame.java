@@ -42,26 +42,26 @@ public class EncryptFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonOpenImage = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        pathOpenImage = new javax.swing.JTextField();
+        pathSaveImage = new javax.swing.JTextField();
+        buttonSaveImage = new javax.swing.JButton();
+        pathFileText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        plainText = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        publicKey = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        cipherText = new javax.swing.JTextArea();
+        buttonEncrypt = new javax.swing.JButton();
+        buttonClose = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        cipherBinary = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,12 +70,12 @@ public class EncryptFrame extends javax.swing.JFrame {
         jLabel1.setText("Steganography Encrypt");
         jLabel1.setToolTipText("");
 
-        jButton1.setText("Open Image");
-        jButton1.setMaximumSize(new java.awt.Dimension(91, 25));
-        jButton1.setMinimumSize(new java.awt.Dimension(91, 25));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonOpenImage.setText("Open Image");
+        buttonOpenImage.setMaximumSize(new java.awt.Dimension(91, 25));
+        buttonOpenImage.setMinimumSize(new java.awt.Dimension(91, 25));
+        buttonOpenImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonOpenImageActionPerformed(evt);
             }
         });
 
@@ -86,70 +86,70 @@ public class EncryptFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        pathOpenImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                pathOpenImageActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        pathSaveImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                pathSaveImageActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Save Image");
-        jButton3.setMaximumSize(new java.awt.Dimension(90, 25));
-        jButton3.setMinimumSize(new java.awt.Dimension(90, 25));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonSaveImage.setText("Save Image");
+        buttonSaveImage.setMaximumSize(new java.awt.Dimension(90, 25));
+        buttonSaveImage.setMinimumSize(new java.awt.Dimension(90, 25));
+        buttonSaveImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonSaveImageActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        pathFileText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                pathFileTextActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        plainText.setColumns(20);
+        plainText.setRows(5);
+        jScrollPane1.setViewportView(plainText);
 
         jLabel2.setText("PLAIN TEXT");
 
         jLabel3.setText("PUBLIC KEY");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        publicKey.setColumns(20);
+        publicKey.setRows(5);
+        jScrollPane2.setViewportView(publicKey);
 
         jLabel4.setText("CIPHER TEXT");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        cipherText.setColumns(20);
+        cipherText.setRows(5);
+        jScrollPane3.setViewportView(cipherText);
 
-        jButton4.setText("ENCRYPT");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonEncrypt.setText("ENCRYPT");
+        buttonEncrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buttonEncryptActionPerformed(evt);
             }
         });
 
-        jButton5.setText("CLOSE");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        buttonClose.setText("CLOSE");
+        buttonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                buttonCloseActionPerformed(evt);
             }
         });
 
         jLabel5.setText("CIPHER BINARY");
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
+        cipherBinary.setColumns(20);
+        cipherBinary.setRows(5);
+        jScrollPane4.setViewportView(cipherBinary);
 
         jLabel6.setText("Minato");
 
@@ -167,8 +167,8 @@ public class EncryptFrame extends javax.swing.JFrame {
                                         .addGap(32, 32, 32)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(buttonSaveImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(buttonOpenImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,18 +178,18 @@ public class EncryptFrame extends javax.swing.JFrame {
                                             .addComponent(jLabel5))
                                         .addGap(54, 54, 54)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
+                                    .addComponent(pathSaveImage)
+                                    .addComponent(pathFileText)
                                     .addComponent(jScrollPane1)
                                     .addComponent(jScrollPane2)
                                     .addComponent(jScrollPane3)
                                     .addComponent(jScrollPane4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(pathOpenImage, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(64, 64, 64)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(buttonEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(70, 70, 70))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(248, 248, 248)
@@ -209,15 +209,15 @@ public class EncryptFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(buttonOpenImage, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(pathOpenImage))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(pathSaveImage)
+                    .addComponent(buttonSaveImage, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pathFileText, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -243,15 +243,15 @@ public class EncryptFrame extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonOpenImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenImageActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -261,9 +261,9 @@ public class EncryptFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You choose to open this file: "
                     + chooser.getSelectedFile().getName());
-            jTextField1.setText(chooser.getSelectedFile().getAbsolutePath());
+            pathOpenImage.setText(chooser.getSelectedFile().getAbsolutePath());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonOpenImageActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -275,16 +275,16 @@ public class EncryptFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You choose to open this file: "
                     + chooser.getSelectedFile().getName());
-            jTextField3.setText(chooser.getSelectedFile().getAbsolutePath());
-            jTextArea1.setText(SentSite.inputTextFile(jTextField3.getText()));
+            pathFileText.setText(chooser.getSelectedFile().getAbsolutePath());
+            plainText.setText(SentSite.inputTextFile(pathFileText.getText()));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void pathSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathSaveImageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_pathSaveImageActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void buttonSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveImageActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -295,46 +295,45 @@ public class EncryptFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("You choose to save this file: "
                     + chooser.getSelectedFile().getName());
-            jTextField2.setText(chooser.getSelectedFile().getAbsolutePath());
+            pathSaveImage.setText(chooser.getSelectedFile().getAbsolutePath());
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buttonSaveImageActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void pathOpenImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathOpenImageActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_pathOpenImageActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void pathFileTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathFileTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_pathFileTextActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void buttonEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEncryptActionPerformed
         // TODO add your handling code here:
-        String plainText = jTextArea1.getText();
 
-        if (jTextField3.getText().equals("") && plainText.equals("")) {
+        if (pathFileText.getText().equals("") && plainText.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
                     "Please enter text OR choose file text!", "WARNING",
                     JOptionPane.WARNING_MESSAGE);
         }
 
-        if (jTextArea2.getText().equals("")) {
+        if (publicKey.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
                     "Please input public key!", "WARNING",
                     JOptionPane.WARNING_MESSAGE);
         }
 
-        if (jTextField2.getText().equals("")) {
+        if (pathSaveImage.getText().equals("")) {
             JOptionPane.showMessageDialog(null,
                     "Please choose save file new image!", "WARNING",
                     JOptionPane.WARNING_MESSAGE);
         }
 
-        if (!plainText.equals("") && !jTextArea2.getText().equals("") && !jTextField2.getText().equals("")) {
+        if (!plainText.getText().equals("") && !publicKey.getText().equals("") && !pathSaveImage.getText().equals("")) {
 
             String textEncrypt = "";
             try {
-                textEncrypt = RSAUtil.getTextToEncrypt(plainText, jTextArea2.getText());
+                textEncrypt = RSAUtil.getTextToEncrypt(plainText.getText(), publicKey.getText());
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException | NoSuchAlgorithmException ex) {
                 JOptionPane.showMessageDialog(null,
                         "Public key is invalid!", "ERROR",
@@ -342,28 +341,28 @@ public class EncryptFrame extends javax.swing.JFrame {
                 Logger.getLogger(EncryptFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            jTextArea3.setText(textEncrypt);
+            cipherText.setText(textEncrypt);
 
             String textBinary = SentSite.convertTextToBinary(textEncrypt);
-            jTextArea4.setText(textBinary);
+            cipherBinary.setText(textBinary);
 
-            BufferedImage image = SentSite.inputImage(jTextField1.getText());
+            BufferedImage image = SentSite.inputImage(pathOpenImage.getText());
             SentSite.getValueRGB(image, textBinary);
 
             // Write new image
-            SentSite.writeNewImage(image, jTextField2.getText());
+            SentSite.writeNewImage(image, pathSaveImage.getText());
 
             JOptionPane.showMessageDialog(null,
                     "Encrypt complete!", "INFORMATION",
                     JOptionPane.INFORMATION_MESSAGE);
         }
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_buttonEncryptActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_buttonCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,11 +396,13 @@ public class EncryptFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonClose;
+    private javax.swing.JButton buttonEncrypt;
+    private javax.swing.JButton buttonOpenImage;
+    private javax.swing.JButton buttonSaveImage;
+    private javax.swing.JTextArea cipherBinary;
+    private javax.swing.JTextArea cipherText;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -412,12 +413,10 @@ public class EncryptFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField pathFileText;
+    private javax.swing.JTextField pathOpenImage;
+    private javax.swing.JTextField pathSaveImage;
+    private javax.swing.JTextArea plainText;
+    private javax.swing.JTextArea publicKey;
     // End of variables declaration//GEN-END:variables
 }
