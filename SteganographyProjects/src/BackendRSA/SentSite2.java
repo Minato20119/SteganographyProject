@@ -25,7 +25,7 @@ public class SentSite2 {
 	private static final int NUMBER_BLOCK_CIPHER = 4;
 	private static final int NUMBER_BLOCK_CIPHER_INDICATOR = 6;
 	private static int increase = 0;
-	private static int checkGreenToChange = 0;
+	private static int checkIndicatorToChange = 0;
 	private static BufferedReader bufferedReader;
 
 	// Input image
@@ -239,14 +239,14 @@ public class SentSite2 {
 			}
 
 			// red max
-			if ((red > green && red > blue) || (red == blue && red > green)) {
+			if ((red > green && red > blue) || (red == blue && red > green) || (red == green && red > blue)
+					|| (red == green && red == blue)) {
 				keyK2 += "0";
 				continue;
 			}
 
 			// green max
-			if ((green > red && green > blue) || (red == green && red == blue) || (red == green && red > blue)
-					|| (blue == green && blue > red)) {
+			if ((green > red && green > blue) || (green == blue && blue > red)) {
 				keyK2 += "1";
 				continue;
 			}
@@ -293,10 +293,10 @@ public class SentSite2 {
 					int rgbValue = image.getRGB(j, height);
 
 					// Set new rgb
-					int newRGBValue = setNewRGBValue(rgbValue, indexKeyK1, indexKeyK2,
+					int newRGBValue = setNewRGBValue(rgbValue, indexKeyK2,
 							blockBinaryCipherText[indexKeyK1]);
 
-					image.setRGB(j, i, newRGBValue);
+					image.setRGB(j, height, newRGBValue);
 				}
 			}
 
@@ -306,7 +306,7 @@ public class SentSite2 {
 
 	}
 
-	private static int setNewRGBValue(int rgbValue, int indexKeyK1, int indexKeyK2, String blockBinaryCipherText) {
+	private static int setNewRGBValue(int rgbValue, int indexKeyK2, String blockBinaryCipherText) {
 
 		int red = (rgbValue >> 16) & 0xff;
 		int green = (rgbValue >> 8) & 0xff;
@@ -318,25 +318,33 @@ public class SentSite2 {
 		String blueBinary = convertDecimalToBinary(blue);
 
 		if (indexKeyK2 == 0) {
-			int changeI = 0;
-			int green1 = 0;
-			int blue2 = 0;
-
+			
+			int greenChannel1 = addCipherToBit(greenBinary, blockBinaryCipherText);
+			int greenChanged = changeChanelOne(green, greenChannel1);
+			
+			int blueChannel2 = addCipherToBit(blueBinary, blockBinaryCipherText);
+			int blueChanged = changeChanelTwo(blue, blueChannel2);
+			
+			int changeIndicator = changeIndicator(redBinary);
+			
+			checkIndicatorToChange = 0;
+			
+			rgbValue = (changeIndicator << 16) | (greenChanged << 8) | blueChanged;
 		}
 
 		if (indexKeyK2 == 1) {
 			int redNew = addCipherToBit(redBinary, blockBinaryCipherText);
-	        int redChanged = changeChanelOne(red, redNew);
+			int redChanged = changeChanelOne(red, redNew);
 
-	        int blueNew = addCipherToBit(blueBinary, blockBinaryCipherText);
-	        int blueChanged = changeChanelTwo(blue, blueNew);
+			int blueNew = addCipherToBit(blueBinary, blockBinaryCipherText);
+			int blueChanged = changeChanelTwo(blue, blueNew);
 
-	        int greenChanged = changeIndicator(greenBinary);
+			int greenChanged = changeIndicator(greenBinary);
 
-	        // Reset check green to change
-	        checkGreenToChange = 0;
+			// Reset check green to change
+			checkIndicatorToChange = 0;
 
-	        rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+			rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
 
 		}
 
@@ -344,16 +352,16 @@ public class SentSite2 {
 
 			int redNew = addCipherToBit(redBinary, blockBinaryCipherText);
 			int redChanged = changeChanelOne(red, redNew);
-			
+
 			int greenNew = addCipherToBit(greenBinary, blockBinaryCipherText);
-	        int greenChanged = changeChanelTwo(green, greenNew);
-	        
-	        int blueChanged = changeIndicator(blueBinary);
+			int greenChanged = changeChanelTwo(green, greenNew);
 
-	        // Reset check green to change
-	        checkGreenToChange = 0;
+			int blueChanged = changeIndicator(blueBinary);
 
-	        rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+			// Reset check green to change
+			checkIndicatorToChange = 0;
+
+			rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
 		}
 
 		return rgbValue;
@@ -372,41 +380,43 @@ public class SentSite2 {
 
 		increase = increase + NUMBER_BLOCK_CIPHER;
 
-		checkGreenToChange++;
+		checkIndicatorToChange++;
 
 		// System.out.println("Embed");
 		// System.out.println("increase: " + increase);
 		return redNew;
 	}
-	
+
 	private static int changeChanelTwo(int blue, int blueNew) {
 
-        // System.out.println("Blue: " + blue + " BlueNew: " + blueNew + " Result: " +
-        // Math.abs(blue - blueNew));
-        if (Math.abs(blue - blueNew) > LIMIT_BIT_TO_CHANGE) {
-            // System.out.println("No Embed");
-            return blue;
-        }
+		// System.out.println("Blue: " + blue + " BlueNew: " + blueNew + "
+		// Result: " +
+		// Math.abs(blue - blueNew));
+		if (Math.abs(blue - blueNew) > LIMIT_BIT_TO_CHANGE) {
+			// System.out.println("No Embed");
+			return blue;
+		}
 
-        increase = increase + NUMBER_BLOCK_CIPHER;
+		increase = increase + NUMBER_BLOCK_CIPHER;
 
-        checkGreenToChange = checkGreenToChange + 2;
+		checkIndicatorToChange = checkIndicatorToChange + 2;
 
-        // System.out.println("Embed");
-        // System.out.println("increase: " + increase);
-        return blueNew;
-    }
+		// System.out.println("Embed");
+		// System.out.println("increase: " + increase);
+		return blueNew;
+	}
 
 	// Add cipher to red or blue
-	private static int addCipherToBit(String rgbBinary, String cipherText) {
+	private static int addCipherToBit(String rgbBinary, String blockBinaryCipherText) {
 
-		if (increase + NUMBER_BLOCK_CIPHER > cipherText.length()) {
+		// TODO: Fix error =======================================================================================================
+		if (increase + NUMBER_BLOCK_CIPHER > blockBinaryCipherText.length()) {
 
 			// No embed (270 - 255 = 15 > 7)
 			return 270;
 		}
 
-		String getCipher = cipherText.substring(increase, increase + NUMBER_BLOCK_CIPHER);
+		String getCipher = blockBinaryCipherText.substring(increase, increase + NUMBER_BLOCK_CIPHER);
 
 		// System.out.println("Cipher: " + getCipher);
 		String rgbChanged = rgbBinary.substring(0, NUMBER_BLOCK_CIPHER) + getCipher;
@@ -421,21 +431,21 @@ public class SentSite2 {
 	private static int changeIndicator(String indicatorBinary) {
 
 		// 00
-		if (checkGreenToChange == 1) {
+		if (checkIndicatorToChange == 1) {
 			// System.out.println("GreenChanged: " + greenBinary.substring(0,
 			// NUMBER_BLOCK_CIPHER_INDICATOR) + "00");
 			return convertBinaryToDecimal(indicatorBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + "00");
 		}
 
 		// 01
-		if (checkGreenToChange == 2) {
+		if (checkIndicatorToChange == 2) {
 			// System.out.println("GreenChanged: " + greenBinary.substring(0,
 			// NUMBER_BLOCK_CIPHER_INDICATOR) + "01");
 			return convertBinaryToDecimal(indicatorBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + "01");
 		}
 
 		// 10
-		if (checkGreenToChange == 3) {
+		if (checkIndicatorToChange == 3) {
 			// System.out.println("GreenChanged: " + greenBinary.substring(0,
 			// NUMBER_BLOCK_CIPHER_INDICATOR) + "10");
 			return convertBinaryToDecimal(indicatorBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + "10");
