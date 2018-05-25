@@ -23,13 +23,13 @@ public class SentSite {
     private static int checkGreenToChange = 0;
     private static BufferedReader bufferedReader;
 
-    public static BufferedImage inputImage(String pathFileImage) {
+    // Input image
+    public static BufferedImage inputImage(String imageFilePath) {
         BufferedImage image = null;
-        File file = null;
         try {
 
-            file = new File(pathFileImage);
-            image = ImageIO.read(file);
+            File imageFile = new File(imageFilePath);
+            image = ImageIO.read(imageFile);
 
         } catch (IOException e) {
             System.out.println("Error input image: " + e);
@@ -37,11 +37,36 @@ public class SentSite {
         return image;
     }
 
+    // Divide the image into 8 blocks
+    public static void divideImageTo8Blocks(BufferedImage image) {
+
+        int height = image.getHeight();
+        int width = image.getWidth();
+
+        int temp = (height - 80) / 8;
+        int result = 0;
+
+        for (int i = 0; i < 8; i++) {
+
+            if (i == 1) {
+                result += 80;
+                result += temp;
+                continue;
+            }
+
+            if (i == 7) {
+                break;
+            }
+
+            result += temp;
+        }
+    }
+
     // Read text file
-    public static String inputTextFile(String pathFileText) {
+    public static String inputTextFile(String pathFileText) throws IOException {
 
         FileReader fileReader = null;
-        String readLine2 = "";
+        String plainText = "";
 
         try {
             fileReader = new FileReader(pathFileText);
@@ -49,24 +74,22 @@ public class SentSite {
 
             String readLine;
             while ((readLine = bufferedReader.readLine()) != null) {
-                readLine2 += readLine + "\n";
+                plainText += readLine + "\n";
             }
 
         } catch (IOException e) {
             System.out.println("Error input text file: " + e);
         } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
 
-                if (fileReader != null) {
-                    fileReader.close();
-                }
-            } catch (IOException e2) {
+            if (bufferedReader != null) {
+                bufferedReader.close();
+            }
+
+            if (fileReader != null) {
+                fileReader.close();
             }
         }
-        return readLine2;
+        return plainText;
     }
 
     // Convert text to binary
@@ -92,19 +115,19 @@ public class SentSite {
         int height = image.getHeight();
         int width = image.getWidth();
 
-        int rgb = 0;
+        int rgbValue = 0;
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                rgb = image.getRGB(j, i);
+                rgbValue = image.getRGB(j, i);
 
                 if (increase >= binaryString.length()) {
                     break;
                 }
 
                 // Set new rgb
-                int rgbNew = setNewRGB(rgb, binaryString);
-                image.setRGB(j, i, rgbNew);
+                int newRGBValue = setNewRGBValue(rgbValue, binaryString);
+                image.setRGB(j, i, newRGBValue);
             }
 
             if (increase >= binaryString.length()) {
@@ -113,12 +136,12 @@ public class SentSite {
         }
     }
 
-    private static int setNewRGB(int rgb, String binaryString) {
+    private static int setNewRGBValue(int rgbValue, String binaryString) {
 
         // System.out.println("============= Set New RGB =======================");
-        int red = (rgb >> 16) & 0xff;
-        int green = (rgb >> 8) & 0xff;
-        int blue = rgb & 0xff;
+        int red = (rgbValue >> 16) & 0xff;
+        int green = (rgbValue >> 8) & 0xff;
+        int blue = rgbValue & 0xff;
 
         // convert to binary
         String redBinary = convertDecimalToBinary(red);
@@ -131,23 +154,23 @@ public class SentSite {
         // System.out.println("============= Red: add CipherToBit ==============");
         int redNew = addCipherToBit(redBinary, binaryString);
         // System.out.println("============= changeRed =========================");
-        int redChanged = changeRed(red, redNew);
+        int redChanged = editRed(red, redNew);
 
         // System.out.println("============= Blue: add CipherToBit =============");
         int blueNew = addCipherToBit(blueBinary, binaryString);
         // System.out.println("============= changeBlue ========================");
-        int blueChanged = changeBlue(blue, blueNew);
+        int blueChanged = editBlue(blue, blueNew);
 
         // System.out.println("============= changeGreen =======================");
-        int greenChanged = changeGreen(greenBinary, red, redNew, blue, blueNew);
+        int greenChanged = editGreen(greenBinary, red, redNew, blue, blueNew);
 
         // Reset check green to change
         checkGreenToChange = 0;
 
 //		System.out.println();
-        rgb = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+        rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
 
-        return rgb;
+        return rgbValue;
     }
 
     // Write new image
@@ -181,7 +204,7 @@ public class SentSite {
     }
 
     // Add cipher to indicator
-    private static int changeGreen(String greenBinary, int red, int redNew, int blue, int blueNew) {
+    private static int editGreen(String greenBinary, int red, int redNew, int blue, int blueNew) {
 
         // 00
         if (checkGreenToChange == 1) {
@@ -210,25 +233,8 @@ public class SentSite {
         return convertBinaryToDecimal(greenBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + "11");
     }
 
-    // Get binary
-    private static String convertDecimalToBinary(int value) {
-
-        String binaryString = "0000000" + Integer.toBinaryString(value);
-        binaryString = binaryString.substring(binaryString.length() - 8);
-
-        return binaryString;
-    }
-
-    // Convert binary to decimal
-    private static int convertBinaryToDecimal(String binary) {
-
-        int decimal = Integer.parseInt(binary, 2);
-
-        return decimal;
-    }
-
     // Check RGB to change
-    private static int changeRed(int red, int redNew) {
+    private static int editRed(int red, int redNew) {
 
         // System.out.println("Red: " + red + " RedNew: " + redNew + " Result: " +
         // Math.abs(red - redNew));
@@ -246,7 +252,7 @@ public class SentSite {
         return redNew;
     }
 
-    private static int changeBlue(int blue, int blueNew) {
+    private static int editBlue(int blue, int blueNew) {
 
         // System.out.println("Blue: " + blue + " BlueNew: " + blueNew + " Result: " +
         // Math.abs(blue - blueNew));
@@ -262,6 +268,23 @@ public class SentSite {
         // System.out.println("Embed");
         // System.out.println("increase: " + increase);
         return blueNew;
+    }
+
+    // Get binary
+    private static String convertDecimalToBinary(int value) {
+
+        String binaryString = "0000000" + Integer.toBinaryString(value);
+        binaryString = binaryString.substring(binaryString.length() - 8);
+
+        return binaryString;
+    }
+
+    // Convert binary to decimal
+    private static int convertBinaryToDecimal(String binary) {
+
+        int decimal = Integer.parseInt(binary, 2);
+
+        return decimal;
     }
 
 }

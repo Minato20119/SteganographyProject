@@ -6,13 +6,14 @@
 package FontendRSA;
 
 import BackendRSA.RSAUtil;
-import BackendRSA.SentSite;
+import BackendRSA.SentSite2;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
@@ -28,12 +29,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Minato
  */
-public class EncryptFrame extends javax.swing.JFrame {
+public class EncryptFrame2 extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public EncryptFrame() {
+    public EncryptFrame2() {
         initComponents();
     }
 
@@ -72,6 +73,10 @@ public class EncryptFrame extends javax.swing.JFrame {
         imageBeforeStego = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        keyK1Label = new javax.swing.JLabel();
+        keyK1 = new javax.swing.JLabel();
+        keyK2Label = new javax.swing.JLabel();
+        keyK2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,6 +175,14 @@ public class EncryptFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Ảnh đã nhúng tin");
 
+        keyK1Label.setText("Key K1:");
+
+        keyK1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        keyK2Label.setText("Key K2:");
+
+        keyK2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,14 +222,23 @@ public class EncryptFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5))
                                 .addGap(54, 54, 54)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pathSaveImage)
-                            .addComponent(pathFileText)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jScrollPane4)
-                            .addComponent(pathOpenImage, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(keyK1Label)
+                                .addGap(18, 18, 18)
+                                .addComponent(keyK1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(keyK2Label)
+                                .addGap(18, 18, 18)
+                                .addComponent(keyK2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pathSaveImage)
+                                .addComponent(pathFileText)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2)
+                                .addComponent(jScrollPane3)
+                                .addComponent(jScrollPane4)
+                                .addComponent(pathOpenImage, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -279,14 +301,22 @@ public class EncryptFrame extends javax.swing.JFrame {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(262, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(keyK1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(keyK1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(keyK2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(keyK2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageBeforeStego, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imageAfterStego, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 144, Short.MAX_VALUE))))
         );
 
         pack();
@@ -318,7 +348,7 @@ public class EncryptFrame extends javax.swing.JFrame {
                 imageBeforeStego.setIcon(imageOpen);
 
             } catch (IOException ex) {
-                Logger.getLogger(EncryptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EncryptFrame2.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_buttonOpenImageActionPerformed
@@ -335,9 +365,9 @@ public class EncryptFrame extends javax.swing.JFrame {
                     + chooser.getSelectedFile().getName());
             pathFileText.setText(chooser.getSelectedFile().getAbsolutePath());
             try {
-                plainText.setText(SentSite.inputTextFile(pathFileText.getText()));
+                plainText.setText(SentSite2.inputTextFile(pathFileText.getText()));
             } catch (IOException ex) {
-                Logger.getLogger(EncryptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EncryptFrame2.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -400,19 +430,23 @@ public class EncryptFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Public key is invalid!", "ERROR",
                         JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(EncryptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EncryptFrame2.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             cipherText.setText(textEncrypt);
 
-            String textBinary = SentSite.convertTextToBinary(textEncrypt);
+            String textBinary = SentSite2.convertTextToBinary(textEncrypt);
             cipherBinary.setText(textBinary);
 
-            BufferedImage image = SentSite.inputImage(pathOpenImage.getText());
-            SentSite.getValueRGB(image, textBinary);
+            BufferedImage image = SentSite2.inputImage(pathOpenImage.getText());
+            List<String> keys = SentSite2.getValueRGB(image, textBinary);
 
+            if (keys.size() > 0) {
+                keyK1.setText(keys.get(0));
+                keyK2.setText(keys.get(1));
+            }
             // Write new image
-            SentSite.writeNewImage(image, pathSaveImage.getText());
+            SentSite2.writeNewImage(image, pathSaveImage.getText());
 
             // Preview image stego
             Image dimg = image.getScaledInstance(imageAfterStego.getWidth(), imageAfterStego.getHeight(),
@@ -421,7 +455,7 @@ public class EncryptFrame extends javax.swing.JFrame {
             imageAfterStego.setIcon(imageStego);
 
             JOptionPane.showMessageDialog(null,
-                    "Encrypt complete!", "INFORMATION",
+                    "Stego complete!", "INFORMATION",
                     JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -449,8 +483,10 @@ public class EncryptFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EncryptFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EncryptFrame2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -459,7 +495,7 @@ public class EncryptFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new EncryptFrame().setVisible(true);
+            new EncryptFrame2().setVisible(true);
         });
     }
 
@@ -485,6 +521,10 @@ public class EncryptFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel keyK1;
+    private javax.swing.JLabel keyK1Label;
+    private javax.swing.JLabel keyK2;
+    private javax.swing.JLabel keyK2Label;
     private javax.swing.JTextField pathFileText;
     private javax.swing.JTextField pathOpenImage;
     private javax.swing.JTextField pathSaveImage;
