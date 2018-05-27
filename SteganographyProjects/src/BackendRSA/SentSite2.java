@@ -267,7 +267,7 @@ public class SentSite2 {
 
         String keyK1 = createK1Key();
         String keyK2 = findK2Key(image, milestones);
-        
+
         List<String> keys = new ArrayList<>();
         keys.add(keyK1);
         keys.add(keyK2);
@@ -276,19 +276,34 @@ public class SentSite2 {
 
         int WIDTH = image.getWidth();
         int indexKey = 0;
+        int indexKeyK1 = 0;
 
         for (int i = 0; i < 9; i++) {
 
             // byte du tru
             if (i == 1) {
                 // Embed K1 and K2
-                embedK1K2andLengthCipher(keyK1, keyK2, blockBinaryCipherText[i].length(), milestones[i], milestones[i + 1], image);
+                embedK1K2andLengthCipher(keyK1, keyK2, blockBinaryCipherText[indexKeyK1].length(), milestones[i], milestones[i + 1], image);
+                keys.add(String.valueOf(blockBinaryCipherText[indexKeyK1].length()));
+                System.out.println("blockBinaryCipherText: " + blockBinaryCipherText[indexKeyK1].length());
                 continue;
             }
 
-            int indexKeyK1 = Integer.valueOf(String.valueOf(keyK1.charAt(indexKey)));
+            indexKeyK1 = Integer.valueOf(String.valueOf(keyK1.charAt(indexKey)));
             int indexKeyK2 = Integer.valueOf(String.valueOf(keyK2.charAt(indexKey)));
-
+            
+            if (blockBinaryCipherText[indexKeyK1].length() % 4 == 1) {
+                blockBinaryCipherText[indexKeyK1] += "000";
+            }
+            
+            if (blockBinaryCipherText[indexKeyK1].length() % 4 == 2) {
+                blockBinaryCipherText[indexKeyK1] += "00";
+            }
+            
+            if (blockBinaryCipherText[indexKeyK1].length() % 4 == 3) {
+                blockBinaryCipherText[indexKeyK1] += "00";
+            }
+            
             for (int height = milestones[i]; height < milestones[i + 1]; height++) {
 
                 for (int width = 0; width < WIDTH; width++) {
@@ -296,7 +311,7 @@ public class SentSite2 {
                     int rgbValue = image.getRGB(width, height);
 
                     // Set new rgb
-                    int newRGBValue = setNewRGBValue(rgbValue, indexKeyK1, indexKeyK2,
+                    int newRGBValue = setNewRGBValue(rgbValue, indexKeyK2,
                             blockBinaryCipherText[indexKeyK1]);
 
                     image.setRGB(width, height, newRGBValue);
@@ -308,7 +323,7 @@ public class SentSite2 {
         return keys;
     }
 
-    private static int setNewRGBValue(int rgbValue, int indexKeyK1, int indexKeyK2, String blockBinaryCipherText) {
+    private static int setNewRGBValue(int rgbValue, int indexKeyK2, String blockBinaryCipherText) {
 
         int red = (rgbValue >> 16) & 0xff;
         int green = (rgbValue >> 8) & 0xff;
@@ -466,7 +481,7 @@ public class SentSite2 {
 
     // Embed key k1, key k2 and length cipher to byte reserve to 2bit LSB
     private static void embedK1K2andLengthCipher(String keyK1, String keyK2, int blockLength, int start, int end, BufferedImage image) {
-        
+
         String binaryKeyK1 = convertTextToBinary(keyK1);
         String binaryKeyK2 = convertTextToBinary(keyK2);
 
@@ -475,27 +490,69 @@ public class SentSite2 {
 
         String binaryAll = binaryKeyK1 + binaryKeyK2 + blockLengthBinary + textBinaryEnd;
         int checkOutBinary = 0;
-        
+
         int WIDTH = image.getWidth();
 
         for (int height = start; height < end; height++) {
             for (int width = 0; width < WIDTH; width++) {
-                
-                int rgb = image.getRGB(width, height);
-                
-                String binaryRGB = convertDecimalToBinary(rgb);
-                
-                if (checkOutBinary >= binaryAll.length()) {
+
+                int rgbValue = image.getRGB(width, height);
+
+                int red = (rgbValue >> 16) & 0xff;
+                int green = (rgbValue >> 8) & 0xff;
+                int blue = rgbValue & 0xff;
+
+                // convert rgb value to binary
+                String redBinary = convertDecimalToBinary(red);
+                String greenBinary = convertDecimalToBinary(green);
+                String blueBinary = convertDecimalToBinary(blue);
+
+                // Embed 2bit LSB
+                if (checkOutBinary + 2 > binaryAll.length()) {
                     return;
                 }
-                
-                binaryRGB = binaryRGB.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + binaryAll.substring(checkOutBinary, checkOutBinary + 2);
-                
+
+                redBinary = redBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + binaryAll.substring(checkOutBinary, checkOutBinary + 2);
                 checkOutBinary += 2;
-                
-                int rgbNew = convertBinaryToDecimal(binaryRGB);
-                
-                image.setRGB(width, height, rgbNew);
+
+                if (checkOutBinary + 2 > binaryAll.length()) {
+                    int redChanged = convertBinaryToDecimal(redBinary);
+                    int greenChanged = convertBinaryToDecimal(greenBinary);
+                    int blueChanged = convertBinaryToDecimal(blueBinary);
+
+                    rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+
+                    image.setRGB(width, height, rgbValue);
+
+                    return;
+                }
+
+                greenBinary = greenBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + binaryAll.substring(checkOutBinary, checkOutBinary + 2);
+                checkOutBinary += 2;
+
+                if (checkOutBinary + 2 > binaryAll.length()) {
+                    int redChanged = convertBinaryToDecimal(redBinary);
+                    int greenChanged = convertBinaryToDecimal(greenBinary);
+                    int blueChanged = convertBinaryToDecimal(blueBinary);
+
+                    rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+
+                    image.setRGB(width, height, rgbValue);
+
+                    return;
+                }
+
+                blueBinary = blueBinary.substring(0, NUMBER_BLOCK_CIPHER_INDICATOR) + binaryAll.substring(checkOutBinary, checkOutBinary + 2);
+                checkOutBinary += 2;
+
+                int redChanged = convertBinaryToDecimal(redBinary);
+                int greenChanged = convertBinaryToDecimal(greenBinary);
+                int blueChanged = convertBinaryToDecimal(blueBinary);
+
+                rgbValue = (redChanged << 16) | (greenChanged << 8) | blueChanged;
+
+                image.setRGB(width, height, rgbValue);
+
             }
         }
     }

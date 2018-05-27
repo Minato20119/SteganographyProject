@@ -74,9 +74,14 @@ public class EncryptFrame2 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         keyK1Label = new javax.swing.JLabel();
-        keyK1 = new javax.swing.JLabel();
         keyK2Label = new javax.swing.JLabel();
-        keyK2 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        keyK1 = new javax.swing.JTextPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        keyK2 = new javax.swing.JTextPane();
+        keyK2Label1 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        lengthMessage = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,11 +182,15 @@ public class EncryptFrame2 extends javax.swing.JFrame {
 
         keyK1Label.setText("Key K1:");
 
-        keyK1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         keyK2Label.setText("Key K2:");
 
-        keyK2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane5.setViewportView(keyK1);
+
+        jScrollPane7.setViewportView(keyK2);
+
+        keyK2Label1.setText("Length:");
+
+        jScrollPane8.setViewportView(lengthMessage);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,23 +231,26 @@ public class EncryptFrame2 extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5))
                                 .addGap(54, 54, 54)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(keyK1Label)
-                                .addGap(18, 18, 18)
-                                .addComponent(keyK1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(keyK2Label)
-                                .addGap(18, 18, 18)
-                                .addComponent(keyK2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(pathSaveImage)
-                                .addComponent(pathFileText)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2)
-                                .addComponent(jScrollPane3)
-                                .addComponent(jScrollPane4)
-                                .addComponent(pathOpenImage, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pathSaveImage)
+                            .addComponent(pathFileText)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane4)
+                            .addComponent(pathOpenImage, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(keyK2Label1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -302,13 +314,15 @@ public class EncryptFrame2 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(keyK1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(keyK1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(keyK2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(keyK2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(keyK1Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(keyK2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane5)
+                                    .addComponent(jScrollPane7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(keyK2Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane8))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageBeforeStego, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,7 +439,7 @@ public class EncryptFrame2 extends javax.swing.JFrame {
 
             String textEncrypt = "";
             try {
-                textEncrypt = RSAUtil.getTextToEncrypt(plainText.getText(), publicKey.getText());
+                textEncrypt = RSAUtil.getTextToEncrypt(plainText.getText(), publicKey.getText().trim());
             } catch (InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException | NoSuchAlgorithmException ex) {
                 JOptionPane.showMessageDialog(null,
                         "Public key is invalid!", "ERROR",
@@ -444,6 +458,7 @@ public class EncryptFrame2 extends javax.swing.JFrame {
             if (keys.size() > 0) {
                 keyK1.setText(keys.get(0));
                 keyK2.setText(keys.get(1));
+                lengthMessage.setText(keys.get(2));
             }
             // Write new image
             SentSite2.writeNewImage(image, pathSaveImage.getText());
@@ -521,10 +536,15 @@ public class EncryptFrame2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel keyK1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTextPane keyK1;
     private javax.swing.JLabel keyK1Label;
-    private javax.swing.JLabel keyK2;
+    private javax.swing.JTextPane keyK2;
     private javax.swing.JLabel keyK2Label;
+    private javax.swing.JLabel keyK2Label1;
+    private javax.swing.JTextPane lengthMessage;
     private javax.swing.JTextField pathFileText;
     private javax.swing.JTextField pathOpenImage;
     private javax.swing.JTextField pathSaveImage;

@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/FontendRSA/DecryptFrame.java</file>
-            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/BackendRSA/SentSite.java</file>
+            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/FontendRSA/DecryptFrame2.java</file>
+            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/BackendRSA/RSAUtil.java</file>
             <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/BackendRSA/SentSite2.java</file>
-            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/FontendRSA/EncryptFrame.java</file>
+            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/BackendRSA/ReceiveSite2.java</file>
+            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/FontendRSA/EncryptFrame2.java</file>
+            <file>file:/C:/Users/Minato/Documents/NetBeansProjects/SteganographyProjects/src/BackendRSA/ReceiveSite.java</file>
         </group>
     </open-files>
 </project-private>

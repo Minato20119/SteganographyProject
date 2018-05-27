@@ -49,6 +49,10 @@ public class ReceiveSite {
         String textEncrypted = "";
 
         for (int i = 0; i < height; i++) {
+            
+            if (textEncrypted.contains("=")) {
+                break;
+            }
             for (int j = 0; j < width; j++) {
                 rgb = image.getRGB(j, i);
 
@@ -63,10 +67,6 @@ public class ReceiveSite {
                 if (textEncrypted.contains("=")) {
                     break;
                 }
-            }
-
-            if (textEncrypted.contains("=")) {
-                break;
             }
         }
 

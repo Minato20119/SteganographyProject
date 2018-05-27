@@ -48,7 +48,9 @@ public class RSAUtil {
         } catch (NoSuchAlgorithmException e) {
         }
         try {
-            privateKey = keyFactory.generatePrivate(keySpec);
+            if (keyFactory != null) {
+                privateKey = keyFactory.generatePrivate(keySpec);
+            }
         } catch (InvalidKeySpecException e) {
         }
 
